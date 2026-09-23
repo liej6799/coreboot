@@ -35,8 +35,8 @@ chip soc/intel/skylake
 		#   PCIe Controller 1 - 1x2 + 2x1
 		#   PCIE 1     - RP1  - Media / SD   - CLKOUT0 - CLKREQ0
 		#   PCIE 2     - USB3 Port
-		#   PCIE 3     - RP3  - WLAN - CLKOUT1 - CLKREQ1
-		#   CLKOUT2 / CLKREQ2 are reserved for optional WiGig
+		#   PCIE 3     - RP3  - WLAN - CLKOUT2 - CLKREQ2
+		#   CLKOUT1 / CLKREQ1 are reserved for optional WiGig
 		#   PCIE 4     - GbE  - GbE  - CLKOUT3 - CLKREQ3
 		#   PCIe Controller 2 - 1x4
 		#   PCIE 5     - RP5  - NVMe - CLKOUT4 - CLKREQ4
@@ -55,11 +55,12 @@ chip soc/intel/skylake
 
 		# M.2 WLAN x1
 		device ref pcie_rp3 on
-			register "PcieRpClkReqSupport[2]"		= "true"
-			register "PcieRpClkReqNumber[2]"		= "1"
-			register "PcieRpClkSrcNumber[2]"		= "1"
+			register "PcieRpClkReqSupport[2]"		= "false"
+			register "PcieRpClkReqNumber[2]"		= "2"
+			register "PcieRpClkSrcNumber[2]"		= "2"
 			register "PcieRpAdvancedErrorReporting[2]"	= "true"
 			register "PcieRpLtrEnable[2]"			= "true"
+			register "PcieRpHotPlug[2]"			= "true"
 			smbios_slot_desc "SlotTypeM2Socket1_DP" "SlotLengthOther" "M.2/A 2230" "SlotDataBusWidth1X"
 		end
 
