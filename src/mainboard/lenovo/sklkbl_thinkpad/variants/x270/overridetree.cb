@@ -90,25 +90,18 @@ chip soc/intel/skylake
 			smbios_slot_desc "SlotTypeM2Socket3" "SlotLengthOther" "M.2/M 2280" "SlotDataBusWidth4X"
 		end
 
-		# SATA 1A (HDD) shares CLKREQ4 via switch with M.2 SSD
+		# M.2 WWAN x1
 		device ref pcie_rp9 on
 			register "PcieRpClkReqSupport[8]"		= "true"
-			register "PcieRpClkReqNumber[8]"		= "4"
-			register "PcieRpClkSrcNumber[8]"		= "4"
+			register "PcieRpClkReqNumber[8]"		= "5"
+			register "PcieRpClkSrcNumber[8]"		= "5"
 			register "PcieRpAdvancedErrorReporting[8]"	= "true"
 			register "PcieRpLtrEnable[8]"			= "true"
 			register "PcieRpHotPlug[8]"			= "false"
-		end
-
-		# M.2 WWAN x1
-		device ref pcie_rp10 on
-			register "PcieRpClkReqSupport[9]"		= "true"
-			register "PcieRpClkReqNumber[9]"		= "5"
-			register "PcieRpClkSrcNumber[9]"		= "5"
-			register "PcieRpAdvancedErrorReporting[9]"	= "true"
-			register "PcieRpLtrEnable[9]"			= "true"
 			smbios_slot_desc "SlotTypeM2Socket1_DP" "SlotLengthOther" "M.2/A 2230" "SlotDataBusWidth1X"
 		end
+
+		device ref pcie_rp10 off end
 
 
 		# SATA 2 (HDD) shares CLKREQ5 with WWAN

@@ -1,5 +1,8 @@
 /* SPDX-License-Identifier: GPL-2.0-only */
 
+#include <delay.h>
+#include <ec/lenovo/h8/h8.h>
+#include <gpio.h>
 #include <soc/gpio.h>
 #include "../../variant.h"
 
@@ -161,7 +164,7 @@ static const struct pad_config gpio_table[] = {
 	PAD_NC(GPP_F1, NONE),
 	PAD_NC(GPP_F2, NONE),
 	PAD_NC(GPP_F3, NONE),
-	PAD_CFG_GPO(GPP_F4, 1, DEEP),					/* -WWAN_RESET */
+	PAD_CFG_GPO(GPP_F4, 0, DEEP),					/* -WWAN_RESET */
 	PAD_NC(GPP_F5, UP_20K),
 	PAD_CFG_GPI_TRIG_OWN(GPP_F6, UP_20K, RSMRST, OFF, ACPI),		/* -MIC_HW_EN (R961 to GND) */
 	PAD_CFG_GPI_TRIG_OWN(GPP_F7, UP_20K, RSMRST, OFF, ACPI),		/* -INT_MIC_DTCT */
@@ -197,4 +200,11 @@ static const struct pad_config gpio_table[] = {
 void variant_config_gpios(void)
 {
 	gpio_configure_pads(gpio_table, ARRAY_SIZE(gpio_table));
+
+	if (h8_wwan_nv_enable()) {
+		h8_wwan_enable(true);
+		mdelay(100);
+		gpio_set(GPP_F4, 1);
+		mdelay(1000);
+	}
 }
