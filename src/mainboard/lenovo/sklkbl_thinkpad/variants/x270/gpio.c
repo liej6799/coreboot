@@ -161,7 +161,7 @@ static const struct pad_config gpio_table[] = {
 	PAD_NC(GPP_F1, NONE),
 	PAD_NC(GPP_F2, NONE),
 	PAD_NC(GPP_F3, NONE),
-	PAD_NC(GPP_F4, NONE),					/* -WWAN_RESET */
+	PAD_CFG_GPO(GPP_F4, 1, DEEP),					/* -WWAN_RESET */
 	PAD_NC(GPP_F5, UP_20K),
 	PAD_CFG_GPI_TRIG_OWN(GPP_F6, UP_20K, RSMRST, OFF, ACPI),		/* -MIC_HW_EN (R961 to GND) */
 	PAD_CFG_GPI_TRIG_OWN(GPP_F7, UP_20K, RSMRST, OFF, ACPI),		/* -INT_MIC_DTCT */
