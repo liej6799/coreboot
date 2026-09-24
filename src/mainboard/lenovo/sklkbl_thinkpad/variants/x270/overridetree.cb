@@ -23,6 +23,11 @@ chip soc/intel/skylake
 			}"
 		end
 
+		# PCH SMBus controller: wired to the Synaptics touchpad
+		# (InterTouch / RMI4 over SMBus, sheets 65/70/22).
+		device ref smbus on
+		end
+
 		# SATA1A is routed to the 2.5-inch storage connector.
 		device ref sata on
 			register "SataPortsEnable[1]" = "1"
