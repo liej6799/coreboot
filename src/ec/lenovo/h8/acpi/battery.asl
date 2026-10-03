@@ -89,6 +89,35 @@ Method(BPAG, 1, NotSerialized)
 #endif
 }
 
+#ifdef BATTERY_INITIALIZATION_RETRIES
+/*
+ * The EC reports state 7 while battery data is being initialized.  Reading
+ * the information pages in that state can return invalid packages.
+ */
+Method(BWAT, 1, NotSerialized)
+{
+	Local0 = BATTERY_INITIALIZATION_RETRIES
+	While (Local0)
+	{
+		Local1 = B0ST
+		If (Arg0)
+		{
+			Local1 = B1ST
+		}
+
+		If ((Local1 & 0x07) != 0x07)
+		{
+			Return (1)
+		}
+
+		Sleep(1000)
+		Local0--
+	}
+
+	Return (0)
+}
+#endif
+
 /* Arg0: Battery
  * Arg1: Battery Status Package
  * Arg2: charging
@@ -210,6 +239,9 @@ Method(BINF, 3, Serialized)
  */
 Method(BINX, 2, Serialized)
 {
+#ifdef BATTERY_INITIALIZATION_RETRIES
+	BWAT(Arg1)
+#endif
 	Acquire(ECLK, 0xffff)
 	^BPAG(Arg1 | 1) /* Battery management */
 	Local0 = BAMA
@@ -371,7 +403,7 @@ Device (BAT0)
 Device (BAT1)
 {
 	Name (_HID, EisaId ("PNP0C0A"))
-	Name (_UID, 0x00)
+	Name (_UID, 0x01)
 	Name (_PCL, Package () { \_SB })
 
 	// Template for _BIF
