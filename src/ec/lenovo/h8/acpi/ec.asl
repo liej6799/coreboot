@@ -100,10 +100,6 @@ Device(EC)
 
 	Method (_INI, 0, NotSerialized)
 	{
-		#if CONFIG(H8_HAS_GFX_LID_NOTIFY)
-		/* Sync initial lid state into the graphics OpRegion */
-		\_SB.PCI0.GFX0.VLOC(LIDS)
-		#endif
 	}
 
 	Method (MUTE, 1, NotSerialized)
@@ -175,17 +171,11 @@ Device(EC)
 
 	Method(_Q2A, 0, NotSerialized)
 	{
-		#if CONFIG(H8_HAS_GFX_LID_NOTIFY)
-		\_SB.PCI0.GFX0.VLOC(One)
-		#endif
 		Notify(^LID, 0x80)
 	}
 
 	Method(_Q2B, 0, NotSerialized)
 	{
-		#if CONFIG(H8_HAS_GFX_LID_NOTIFY)
-		\_SB.PCI0.GFX0.VLOC(Zero)
-		#endif
 		Notify(^LID, 0x80)
 	}
 

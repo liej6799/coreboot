@@ -23,6 +23,4 @@ DefinitionBlock(
 	}
 
 	#include <southbridge/intel/common/acpi/sleepstates.asl>
-
-	#include "acpi/gfx_lid.asl"
 }
