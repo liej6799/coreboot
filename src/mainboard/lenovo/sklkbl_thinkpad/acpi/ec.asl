@@ -14,6 +14,8 @@ Name(\TPSV, 90)
 Name(\FLVL, 0)
 
 #include <ec/lenovo/h8/acpi/ec.asl>
-#if CONFIG(H8_HAS_BAT_THRESHOLDS_IMPL)
+#if CONFIG(BOARD_LENOVO_X270)
+#include <ec/lenovo/h8/acpi/thinkpad_bat_thresholds_24.asl>
+#elif CONFIG(H8_HAS_BAT_THRESHOLDS_IMPL)
 #include <ec/lenovo/h8/acpi/thinkpad_bat_thresholds_b0.asl>
 #endif

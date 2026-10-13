@@ -8,9 +8,7 @@ config BOARD_LENOVO_SKLKBL_THINKPAD_COMMON
 	select EC_LENOVO_H8
 	select EC_LENOVO_MEC1653
 	select EC_LENOVO_PMH7
-	# X270 vendor firmware implements thresholds through an SMI service, not
-	# the legacy EC registers used by thinkpad_bat_thresholds_b0.asl.
-	select H8_HAS_BAT_THRESHOLDS_IMPL if !BOARD_LENOVO_X270
+	select H8_HAS_BAT_THRESHOLDS_IMPL
 	select H8_HAS_BAT_INFO_EXTENDED
 	select H8_HAS_LEDLOGO
 	select H8_HAS_FNLOCK_LED
