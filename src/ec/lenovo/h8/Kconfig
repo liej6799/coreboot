@@ -49,6 +49,14 @@ config H8_HAS_BAT_THRESHOLDS_IMPL
 	bool
 	default n
 
+config H8_HAS_GFX_LID_NOTIFY
+	bool
+	default n
+	help
+	  Report lid state changes to the integrated graphics driver through
+	  the OpRegion mailbox (CLID/CEVT/CSTS) so that it can power down
+	  the internal panel when the lid is closed.
+
 config H8_HAS_BAT_INFO_EXTENDED
 	bool
 	default n

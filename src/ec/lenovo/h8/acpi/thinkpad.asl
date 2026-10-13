@@ -311,6 +311,10 @@ Device (HKEY)
 			\_SB.PCI0.LPCB.EC.BTEB = WBDC
 			\_SB.PCI0.LPCB.EC.WWEB = WWAN
 		}
+		#if CONFIG(H8_HAS_GFX_LID_NOTIFY)
+		/* Re-sync lid state to the graphics OpRegion after resume */
+		\_SB.PCI0.GFX0.VLOC(\_SB.PCI0.LPCB.EC.LID._LID())
+		#endif
 	}
 
 	#if CONFIG(H8_HAS_BAT_CHARGE_BEHAVIOUR)
